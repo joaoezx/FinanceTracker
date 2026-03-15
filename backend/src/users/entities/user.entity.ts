@@ -4,7 +4,9 @@ import {
   Column,
   CreateDateColumn,
   Timestamp,
+  OneToMany,
 } from 'typeorm';
+import { Card } from '../../cards/entities/card.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -22,4 +24,7 @@ export class User {
 
   @CreateDateColumn()
   created_at!: Timestamp;
+
+  @OneToMany(() => Card, (card) => card.user)
+  cards!: Card[];
 }
