@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@nestjs/mapped-types": "*",
     "aws-sdk": "^2.1693.0",
     "bcrypt": "^6.0.0",
     "pg": "^8.20.0",
