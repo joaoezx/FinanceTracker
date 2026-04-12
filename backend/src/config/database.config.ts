@@ -11,15 +11,12 @@ export const buildDatabaseConfig = (
 
   return {
     type: 'postgres',
-    host: configService.get<string>('DB_HOST'),
-    port: Number(configService.get<string>('DB_PORT')),
-    username: configService.get<string>('DB_USER'),
+    host: configService.get<string>('DB_HOST', 'localhost'),
+    port: Number(configService.get<string>('DB_PORT', '5432')),
+    username: configService.get<string>('DB_USER', 'postgres'),
     password: configService.get<string>('DB_PASS'),
-    database: configService.get<string>('DB_NAME'),
+    database: configService.get<string>('DB_NAME', 'financetracker'),
     autoLoadEntities: true,
     synchronize: true,
-    ssl: {
-      rejectUnauthorized: false,
-    },
   };
 };

@@ -5,8 +5,10 @@ import {
   ManyToOne,
   JoinColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { Transaction } from './transaction.entity';
 
 @Entity({ name: 'cards' })
 export class Card {
@@ -19,8 +21,8 @@ export class Card {
   @Column({ type: 'varchar', length: 50 })
   bank!: string;
 
-  @Column({ type: 'varchar', length: 50 })
-  description!: string;
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  description?: string;
 
   @Column({ type: 'numeric', precision: 10, scale: 2 })
   limit!: number;
@@ -34,6 +36,9 @@ export class Card {
   @ManyToOne(() => User, (user) => user.cards)
   @JoinColumn({ name: 'user_id' })
   user!: User;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.card)
+  transactions!: Transaction[];
 
   @CreateDateColumn()
   createdAt!: Date;
